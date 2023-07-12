@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Activity.UploadActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_upload"
+        android:layout_width="match_parent"
+        app:title="Upload Image"
+        app:titleTextColor="@color/black"
+
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        >
+    <ImageView
+        android:id="@+id/iv_cross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cross"
+        android:layout_alignEnd="@id/iv_selected_image"
+        android:layout_margin= "5dp"
+        />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_selected_image"
+        android:layout_width="210dp"
+        android:layout_height="150dp"
+android:layout_below="@+id/iv_cross"
+        android:background="@drawable/shape_image_border"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/bro"
+
+      />
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_select_image"
+        android:layout_width="342dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/background_btn_image"
+        android:textAllCaps="false"
+        android:text="Select Image"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUploadImage"
+        android:layout_width="342dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/background_feeds_upload_btn"
+        android:textAllCaps="false"
+        android:text="Upload Image"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        />
+
+</LinearLayout>

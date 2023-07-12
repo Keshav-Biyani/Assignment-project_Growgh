@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white"
+    tools:context=".Activity.MainActivity">
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/bro"
+    />
+
+<TextView
+    android:id="@+id/headline"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="42dp"
+    android:text="Welcome Keshav"
+    android:textColor="#1E1E1E"
+    android:textSize="32sp"
+    android:gravity="center"
+    />
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btnFeed"
+    android:layout_width="342dp"
+    android:layout_height="74dp"
+    android:layout_marginTop="35dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    android:background="@drawable/background_feeds_upload_btn"
+    android:textAllCaps="false"
+    android:text="Feeds"
+    android:textColor="@color/white"
+    android:textSize="17sp"
+    android:textAlignment="center"
+    />
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btnUpload"
+    android:layout_width="342dp"
+    android:layout_height="74dp"
+    android:layout_marginTop="35dp"
+    android:background="@drawable/background_feeds_upload_btn"
+    android:textAllCaps="false"
+    android:text="Upload Image"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    android:textColor="@color/white"
+    android:textSize="17sp"
+    android:textAlignment="center"
+    />
+
+</LinearLayout>
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout-->
+<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:orientation="vertical"-->
+<!--tools:context=".Activity.MainActivity">-->
+
+<!--<ImageView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="255dp"-->
+<!--    android:src="@drawable/bro"-->
+
+<!--    android:layout_margin="15dp"/>-->
+<!--<TextView-->
+<!--    android:id="@+id/headline"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:text="@string/headline"-->
+<!--    android:gravity="center_horizontal|top"-->
+<!--    android:textAppearance="@style/headline"/>-->
+<!--<Button-->
+<!--    android:id="@+id/btnFeed"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="40dp"-->
+<!--    android:text="@string/feeds"-->
+<!--    android:textAppearance="@style/feeds"-->
+<!--    android:gravity="center_horizontal"-->
+<!--    android:layout_margin="15dp"-->
+<!--    android:backgroundTint="#125078"/>-->
+<!--<Button-->
+<!--    android:id="@+id/btnUpload"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="40dp"-->
+<!--    android:text="upload"-->
+<!--    android:textAppearance="@style/feeds"-->
+<!--    android:gravity="center_horizontal"-->
+<!--    android:layout_margin="15dp"-->
+<!--    android:backgroundTint="#125078" />-->
+<!--</LinearLayout>-->
