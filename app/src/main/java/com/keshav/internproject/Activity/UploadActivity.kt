@@ -1,13 +1,17 @@
 package com.keshav.internproject.Activity
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.WindowInsetsControllerCompat
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -23,11 +27,12 @@ class UploadActivity : AppCompatActivity() {
         binding = ActivityUploadBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         window.statusBarColor = resources.getColor((R.color.white),this.theme)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.isAppearanceLightStatusBars = true
         setSupportActionBar(binding?.toolbarUpload)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding?.toolbarUpload?.setNavigationOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
         binding?.btnSelectImage?.setOnClickListener {
                     chooseFromGallery()
@@ -38,18 +43,36 @@ class UploadActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == RESULT_OK){
-            if(requestCode == GalleryCode){
-                if(data!= null){
-                    val contentUri = data.data
-                    val SelectedImageBitmap  =MediaStore.Images.Media.getBitmap(this.contentResolver,contentUri)
-                    binding?.ivSelectedImage?.setImageBitmap(SelectedImageBitmap)
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if(resultCode == RESULT_OK){
+//            if(requestCode == GalleryCode){
+//                if(data!= null){
+//                    val contentUri = data.data
+//                    val SelectedImageBitmap  =MediaStore.Images.Media.getBitmap(this.contentResolver,contentUri)
+//                    binding?.ivSelectedImage?.setImageBitmap(SelectedImageBitmap)
+//                }
+//            }
+//        }
+//    }
+private val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    if (result.resultCode == Activity.RESULT_OK) {
+        val data: Intent? = result.data
+        if (data != null) {
+            val contentUri = data.data
+            val selectedImageBitmap = contentUri?.let { uri ->
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    val source = ImageDecoder.createSource(contentResolver, uri)
+                    ImageDecoder.decodeBitmap(source)
+                } else {
+                    @Suppress("DEPRECATION")
+                    MediaStore.Images.Media.getBitmap(contentResolver, uri)
                 }
             }
+            binding?.ivSelectedImage?.setImageBitmap(selectedImageBitmap)
         }
     }
+}
     private fun chooseFromGallery() {
         //Toast.makeText(this,"Upload thi",Toast.LENGTH_LONG).show()
         Dexter.withContext(this)
@@ -59,9 +82,8 @@ class UploadActivity : AppCompatActivity() {
             ).withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     if (report.areAllPermissionsGranted()) {
-                        val GalleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-
-                        startActivityForResult(GalleryIntent, GalleryCode)
+                        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        galleryLauncher.launch(galleryIntent)
                     }
                 }
 
@@ -96,9 +118,7 @@ AlertDialog.Builder(this@UploadActivity).setMessage(
 
     }.show()
     }
-        companion object{
-            private const val GalleryCode =1
-        }
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null

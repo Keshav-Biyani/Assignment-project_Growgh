@@ -52,7 +52,7 @@ private fun apirequest(){
                 try {
                     val jsonArray = it.getJSONArray("photos")
                     val length = jsonArray.length()
-                    Log.e("Test","Print the ${length}")
+                   // Log.e("Test","Print the ${length}")
                     for( i in 0..length){
                         val jsonobj = jsonArray.getJSONObject(i)
                         val id = jsonobj.getInt("id")
@@ -104,7 +104,7 @@ page++
                     try {
                         val jsonArray = it.getJSONArray("photos")
                         val length = jsonArray.length()
-                        Log.e("Test","Print the ${length}")
+                       // Log.e("Test","Print the ${length}")
                         for( i in 0..length){
                             val jsonobj = jsonArray.getJSONObject(i)
                             val id = jsonobj.getInt("id")

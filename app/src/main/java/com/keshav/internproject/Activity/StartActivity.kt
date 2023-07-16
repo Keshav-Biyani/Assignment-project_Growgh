@@ -2,11 +2,10 @@ package com.keshav.internproject.Activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.core.view.WindowInsetsControllerCompat
 import com.keshav.internproject.Model.ContantModel
 import com.keshav.internproject.Object.Contants
 import com.keshav.internproject.R
@@ -21,7 +20,9 @@ class StartActivity : AppCompatActivity() {
         binding = ActivityStartBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         window.statusBarColor = resources.getColor((R.color.white),this.theme)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.isAppearanceLightStatusBars = true
+       // window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         val shareedPref = getSharedPreferences("Pref",Context.MODE_PRIVATE)
         val startComplete = shareedPref.getBoolean("startComplete",false)
 
