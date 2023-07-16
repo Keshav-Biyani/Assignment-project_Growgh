@@ -16,6 +16,7 @@ class ConnectionManager {
 //            else{
 //                return false
 //            }
+
 //        }
     fun checkConectivity(context: Context) =
         (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).run {
