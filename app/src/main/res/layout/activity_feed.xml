@@ -56,7 +56,7 @@
                 />
 
         </LinearLayout>
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="358dp"
             android:layout_height="59dp"

@@ -4,6 +4,7 @@ import com.keshav.internproject.Model.ContantModel
 import com.keshav.internproject.R
 
 object Contants {
+      // We defined object becoause it do not required any instance it is like singleton class
         fun getContantsDetails() : ArrayList<ContantModel>{
             val list = ArrayList<ContantModel>()
             val list1 = ContantModel(
