@@ -5,7 +5,10 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
 
     </style>
-
+    <style name="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
     <style name="Theme.InternProject" parent="Base.Theme.InternProject" />
     <style name="headline">
         <item name="android:textSize">32sp</item>
@@ -16,6 +19,7 @@
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
+
 
 
 </resources>

@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorAccent">#3A7EB0</color>
     <color name="statusFeed">#044265</color>
+    <color name="share">#15547C</color>
 </resources>

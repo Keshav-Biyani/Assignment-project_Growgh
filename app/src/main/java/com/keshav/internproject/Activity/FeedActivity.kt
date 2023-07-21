@@ -12,7 +12,9 @@ import android.service.voice.VoiceInteractionSession
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -22,6 +24,7 @@ import com.keshav.internproject.R
 
 import com.keshav.internproject.databinding.ActivityFeedBinding
 import com.keshav.internproject.utlies.ConnectionManager
+import com.keshav.internproject.utlies.SwipeShareCallBack
 import org.json.JSONException
 
 class FeedActivity : AppCompatActivity() {
@@ -39,7 +42,9 @@ class FeedActivity : AppCompatActivity() {
             binding?.swipeRefreshLayout?.isRefreshing = true
             listfeed.clear()
             newapirequest()
+
         }
+        swiptoGesture(binding?.rvFeedPost)
 }
 private fun apirequest(){
 
@@ -68,6 +73,7 @@ private fun apirequest(){
                         binding?.rvFeedPost?.adapter = feedAdapter
 
                     }
+                    swiptoGesture(binding?.rvFeedPost)
 
                 }
                 catch (e: JSONException) {
@@ -120,6 +126,7 @@ page++
                             binding?.rvFeedPost?.adapter = feedAdapter
 
                         }
+                        swiptoGesture(binding?.rvFeedPost)
 
 
                     }
@@ -164,6 +171,28 @@ page++
                     dialog,_->
                 dialog.dismiss()
             }.show()
+    }
+    fun swiptoGesture(itemRV : RecyclerView?){
+        val swipeGesture = object :SwipeShareCallBack(this){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                try{
+                    when(direction){
+                        ItemTouchHelper.RIGHT->{
+                            Log.e("run swipe","Heel")
+
+
+
+                        }
+                    }
+                }catch (e : Exception){
+
+                }
+            }
+        }
+        val touchHelper = ItemTouchHelper(swipeGesture)
+        touchHelper.attachToRecyclerView(itemRV)
+
     }
     override fun onDestroy() {
         super.onDestroy()

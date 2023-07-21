@@ -3,4 +3,11 @@
     <string name="headline">Welcome Ayush</string>
     <string name="feeds">Feeds\n</string>
     <string name="Feed_post_description">Meta explains how AI influences what we see on Facebook and Instagram</string>
+    <string name="home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_upload_image">add upload image</string>
+    <string name="e_g_keshav">e_g_Keshav</string>
+    <string name="login">Login</string>
+    <string name="preference_file_name">shared_pref\n</string>
 </resources>

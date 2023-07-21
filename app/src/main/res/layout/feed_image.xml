@@ -111,12 +111,14 @@
                 >
 
                 <ImageView
+                    android:id="@+id/ivLike"
                     android:layout_width="18dp"
                     android:layout_height="19dp"
-                    android:src="@drawable/like"
+                    android:src="@drawable/baseline_favorite_border_24"
                     />
 
                 <TextView
+                    android:id="@+id/txtLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -142,13 +144,14 @@
                     />
 
                 <ImageView
-                    android:layout_width="18dp"
+                    android:id="@+id/ivShare"
+                    android:layout_width="wrap_content"
                     android:layout_height="19dp"
-                    android:src="@drawable/share"
                     android:layout_marginStart="47dp"
-                    />
+                    android:src="@drawable/share" />
 
                 <TextView
+                    android:id="@+id/txtShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
