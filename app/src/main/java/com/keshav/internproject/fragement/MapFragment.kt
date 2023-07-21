@@ -31,12 +31,9 @@ import com.keshav.internproject.databinding.FragmentMapBinding
 
 
 class MapFragment : Fragment() , OnMapReadyCallback {
-    private var mapView: MapView? = null
-//    var currentLocation: Location? = null
-
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var currentLocation: Location? = null
-    private lateinit var locationRequest: LocationRequest
+    private lateinit var mapView: MapView
+    private lateinit var googleMap: GoogleMap
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var binding : FragmentMapBinding? = null
 
     override fun onCreateView(
@@ -49,83 +46,69 @@ class MapFragment : Fragment() , OnMapReadyCallback {
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding?.toolbar)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
+        (requireActivity() as AppCompatActivity).supportActionBar?.title =""
         binding?.toolbar?.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
         mapView =  binding?.gmGoogleMap!!
 
-        mapView!!.onCreate(savedInstanceState)
-        mapView!!.getMapAsync(this)
-
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         return binding?.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        checkLocationPermission()
-        currentLocation = getCurrentLocation()
 
-    }
-    private fun checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fetchCurrentLocation()
+
+
+    override fun onMapReady(map: GoogleMap) {
+        googleMap = map
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            // If location permission is granted, show the user's current location on the map
+            showCurrentLocationOnMap()
         } else {
+            // Request location permission if not granted
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_CODE_LOCATION_PERMISSION
+                LOCATION_PERMISSION_REQUEST_CODE
             )
         }
     }
-    private fun  getCurrentLocation(): Location? {
-        return currentLocation
-    }
-    private fun fetchCurrentLocation() {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000)
-                .setWaitForAccurateLocation(false)
-                .build()
-            val locationCallback = object : LocationCallback() {
-                override fun onLocationResult(locationResult: LocationResult) {
-                    currentLocation = locationResult.lastLocation
-                    // Update the map with the new current location
-                    mapView?.getMapAsync(this@MapFragment)
+    private fun showCurrentLocationOnMap() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+
+
+                    googleMap.addMarker(MarkerOptions().position(currentLatLng).title("Current Location"))
+
+
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
                 }
             }
-
-            fusedLocationProviderClient.requestLocationUpdates(
-                locationRequest,
-                locationCallback,
-                Looper.getMainLooper()
-            )
-        } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_CODE_LOCATION_PERMISSION
-            )
         }
     }
+    private fun navigateToVideoFragment() {
+        val videoFragment = VideoFragment()
+
+        // Perform the fragment transaction to switch to the video fragment.
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.map, videoFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
 
     companion object {
-        private const val REQUEST_CODE_LOCATION_PERMISSION = 1001
-    }
-    override fun onMapReady(googleMap: GoogleMap) {
-        currentLocation?.let { location ->
-            val latLng = LatLng(location.latitude, location.longitude)
-            val markerOptions = MarkerOptions().position(latLng).title("My Location")
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-            googleMap.addMarker(markerOptions)
-            googleMap.uiSettings.apply {
-                isZoomControlsEnabled = true
-                isZoomGesturesEnabled = true // Enable finger zoom gestures
-            }
-        }
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
     }
 
 

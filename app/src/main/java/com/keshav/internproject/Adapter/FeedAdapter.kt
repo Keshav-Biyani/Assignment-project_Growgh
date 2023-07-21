@@ -5,6 +5,8 @@ import android.content.Intent
 import android.media.MediaScannerConnection
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.keshav.internproject.Model.FeedModel
@@ -21,6 +23,8 @@ class FeedAdapter(val context: Context,private val listof : ArrayList<FeedModel>
          var ivShare = binding.ivShare
          var txtShare = binding.txtShare
          var txtLike = binding.txtLike
+         var txtCommetn = binding.txtComm
+         var iv_comm = binding.ivComment
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedAdapter.ViewHolder {
@@ -34,6 +38,12 @@ class FeedAdapter(val context: Context,private val listof : ArrayList<FeedModel>
         }
         holder.txtShare.setOnClickListener {
             share(context,feed.url)
+        }
+        holder.txtCommetn.setOnClickListener {
+            Toast.makeText(context,"Comment",Toast.LENGTH_SHORT).show()
+        }
+        holder.iv_comm.setOnClickListener {
+            Toast.makeText(context,"Comment",Toast.LENGTH_SHORT).show()
         }
         var isLiked = false
         holder.txtLike.setOnClickListener {
@@ -70,14 +80,20 @@ return listof[position].url
         this.onClickListener = onClickListener
     }
     private fun Like(isLiked : Boolean, holder : FeedAdapter.ViewHolder) : Boolean{
+        val zoomInAnim = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
+        val zoomOutAnim = AnimationUtils.loadAnimation(context, R.anim.zoom_out)
         if(isLiked){
             holder.iv_like.setImageResource(R.drawable.baseline_favorite_border_24)
+            holder.iv_like.startAnimation(zoomInAnim)
+            holder.iv_like.startAnimation(zoomOutAnim)
             val t = false
             holder.txtLike.setText("21 Like")
             return t
             // share(context,feed.url)
         } else{
             holder.iv_like.setImageResource(R.drawable.baseline_favorite_24_red)
+            holder.iv_like.startAnimation(zoomInAnim)
+            holder.iv_like.startAnimation(zoomOutAnim)
             val i= true
             holder.txtLike.setText("22 Like")
             return i

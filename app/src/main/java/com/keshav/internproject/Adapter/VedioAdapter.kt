@@ -6,7 +6,10 @@ import android.media.MediaPlayer
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.keshav.internproject.Model.FeedModel
 import com.keshav.internproject.Model.VedioModel
@@ -20,6 +23,8 @@ RecyclerView.Adapter<VedioAdapter.ViewHolder>() {
 val vvLike = binding.vvlike
         val ivShare = binding.ivShareVedio
         val likeVedio = binding.likevedio
+        val proreesbar = binding.progressBar
+        val ivVedioCom = binding.ivVedioComment
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -55,8 +60,12 @@ val vvLike = binding.vvlike
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val vedio = listof[position]
         holder.vvLike.setVideoURI(Uri.parse(vedio.url))
+        holder.ivVedioCom.setOnClickListener {
+            Toast.makeText(context,"Comment", Toast.LENGTH_SHORT).show()
+        }
         holder.vvLike.setOnPreparedListener( object  :MediaPlayer.OnPreparedListener {
             override fun onPrepared(mp: MediaPlayer): Unit{
+                holder.proreesbar.visibility = View.GONE
                 mp.start()
                 val vidRatio : Float = (mp.videoWidth/mp.videoHeight).toFloat()
                 val screenRatio : Float = (holder.vvLike.width/holder.vvLike.height).toFloat()
@@ -86,14 +95,20 @@ val vvLike = binding.vvlike
 
         }
     private fun Like(isLiked : Boolean, holder : VedioAdapter.ViewHolder) : Boolean{
+        val zoomInAnim = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
+        val zoomOutAnim = AnimationUtils.loadAnimation(context, R.anim.zoom_out)
         if(isLiked){
             holder.likeVedio.setImageResource(R.drawable.baseline_favorite_border_24)
+            holder.likeVedio.startAnimation(zoomInAnim)
+            holder.likeVedio.startAnimation(zoomOutAnim)
             val t = false
 
             return t
             // share(context,feed.url)
         } else{
             holder.likeVedio.setImageResource(R.drawable.baseline_favorite_24_red)
+            holder.likeVedio.startAnimation(zoomInAnim)
+            holder.likeVedio.startAnimation(zoomOutAnim)
             val i= true
 
             return i

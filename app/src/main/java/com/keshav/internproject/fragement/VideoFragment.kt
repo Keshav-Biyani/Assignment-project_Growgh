@@ -26,6 +26,7 @@ private var binding : FragmentVedioBinding? = null
         // Inflate the layout for this fragment
         binding = FragmentVedioBinding.inflate(inflater,container,false)
 
+
 val vedio1 = VedioModel("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4")
         val vedio2 = VedioModel("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4")
         val vedio3 = VedioModel("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4")
