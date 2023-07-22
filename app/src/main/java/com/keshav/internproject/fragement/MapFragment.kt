@@ -30,6 +30,7 @@ import com.keshav.internproject.R
 import com.keshav.internproject.databinding.FragmentMapBinding
 
 
+@Suppress("DEPRECATION")
 class MapFragment : Fragment() , OnMapReadyCallback {
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
@@ -47,7 +48,7 @@ class MapFragment : Fragment() , OnMapReadyCallback {
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayShowHomeEnabled(true)
         (requireActivity() as AppCompatActivity).supportActionBar?.title =""
-        binding?.toolbar?.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
+        binding?.toolbar?.setNavigationOnClickListener { requireActivity().onBackPressed() }
         mapView =  binding?.gmGoogleMap!!
 
         mapView.onCreate(savedInstanceState)
@@ -56,10 +57,6 @@ class MapFragment : Fragment() , OnMapReadyCallback {
 
         return binding?.root
     }
-
-
-
-
 
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
@@ -96,20 +93,30 @@ class MapFragment : Fragment() , OnMapReadyCallback {
             }
         }
     }
-    private fun navigateToVideoFragment() {
-        val videoFragment = VideoFragment()
 
-        // Perform the fragment transaction to switch to the video fragment.
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.map, videoFragment)
-            .addToBackStack(null)
-            .commit()
-    }
 
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
     }
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
 
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
 
 }
