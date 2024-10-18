@@ -1,7 +1,8 @@
 
+
 # Growigh
 
-**Growigh** is a social media app built using Kotlin and XML. It allows users to scroll through images and videos in a feed, like posts, and share content with other apps. This app demonstrates the integration of several Android features, including Google Maps API, RecyclerView for feeds, Volley for API access, and more.
+**Growigh** is a social media app built using **Kotlin** and **XML**. It allows users to scroll through images and videos in a feed, like posts, and share content with other apps. This app demonstrates the integration of several Android features, including **Google Maps API**, **RecyclerView** for feeds, **Volley** for API access, and more.
 
 ## Features
 
@@ -17,17 +18,12 @@
 - **Splash Screen and Onboarding**: Includes a splash screen and onboarding screens to guide new users through the app features.
 
 ## Screenshots
-![IMG-20241017-WA0034](https://github.com/user-attachments/assets/5a009a44-a37a-4e09-8c99-90ac5d00fa3e)
-![IMG-20241017-WA0037](https://github.com/user-attachments/assets/2ce339aa-434e-435e-91cf-17825837da32)
-![IMG-20241017-WA0036](https://github.com/user-attachments/assets/38091926-341c-495d-80bf-0f86b54f4b95)
-![IMG-20241017-WA0038](https://github.com/user-attachments/assets/81cab529-3135-4f45-8165-79aa8c016a11)
-![IMG-20241017-WA0032](https://github.com/user-attachments/assets/49077234-2a1c-4dac-b172-82de5f86ed10)
-![IMG-20241017-WA0031](https://github.com/user-attachments/assets/7189ceba-7437-43df-84fd-7b4335829a20)
-![IMG-20241017-WA0030](https://github.com/user-attachments/assets/dbd885d2-57fa-46d7-9e08-9a31a5271ce5)
-![IMG-20241017-WA0029](https://github.com/user-attachments/assets/7595eb3b-901d-4528-9462-5bc0502e69e7)
-![IMG-20241017-WA0033](https://github.com/user-attachments/assets/01fa64fe-935e-4df4-af10-555cb6b6ae0a)
-![IMG-20241017-WA0035](https://github.com/user-attachments/assets/9bce7202-794a-40ab-b966-66dbb80d34ec)
 
+|  ![IMG-20241017-WA0029](https://github.com/user-attachments/assets/7595eb3b-901d-4528-9462-5bc0502e69e7)| ![IMG-20241017-WA0030](https://github.com/user-attachments/assets/dbd885d2-57fa-46d7-9e08-9a31a5271ce5) | ![IMG-20241017-WA0032](https://github.com/user-attachments/assets/49077234-2a1c-4dac-b172-82de5f86ed10) |
+|:--:|:--:|:--:|
+| ![IMG-20241017-WA0033](https://github.com/user-attachments/assets/01fa64fe-935e-4df4-af10-555cb6b6ae0a) | ![IMG-20241017-WA0031](https://github.com/user-attachments/assets/7189ceba-7437-43df-84fd-7b4335829a20) | ![IMG-20241017-WA0034](https://github.com/user-attachments/assets/5a009a44-a37a-4e09-8c99-90ac5d00fa3e) |
+| ![IMG-20241017-WA0035](https://github.com/user-attachments/assets/9bce7202-794a-40ab-b966-66dbb80d34ec) | ![IMG-20241017-WA0037](https://github.com/user-attachments/assets/2ce339aa-434e-435e-91cf-17825837da32) | ![IMG-20241017-WA0036](https://github.com/user-attachments/assets/38091926-341c-495d-80bf-0f86b54f4b95) |
+| ![IMG-20241017-WA0038](https://github.com/user-attachments/assets/81cab529-3135-4f45-8165-79aa8c016a11) |  |  |
 
 ## API Usage
 
@@ -75,6 +71,4 @@ You will need to add your Pexels API key in your project securely using environm
 
 Contributions are welcome! Feel free to fork this repository, create issues, and submit pull requests to improve the app.
 
-
----
-
+--- 
